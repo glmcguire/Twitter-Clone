@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head />
+<h:body>
+	<ui:composition template="/templates/common-layout.xhtml">
+		<ui:define name="head">
+			<title>Login</title>
+		</ui:define>
+		<ui:define name="main">
+			<h:form>
+				<p:panel>
+					<h:outputText
+						value="Login failed. Please check your username and password."
+						rendered="#{loginBean.loginFailed}" />
+					<h:panelGrid columns="3">
+
+						<p:outputLabel for="username" value="Username" />
+						<h:inputText id="username" value="#{loginBean.user.name}"
+							required="true" />
+						<p:message for="username" />
+						<p:outputLabel for="password" value="Password" />
+						<h:inputSecret id="password" value="#{loginBean.user.password}"
+							required="true" />
+						<p:message for="password" />
+
+					</h:panelGrid>
+
+					<f:facet name="footer">
+						<p:commandButton value="Login" validateClient="true"
+							process="@form" update="@form" action="#{loginBean.login()}" />
+					</f:facet>
+				</p:panel>
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

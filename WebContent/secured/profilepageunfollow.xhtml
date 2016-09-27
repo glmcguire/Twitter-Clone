@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head />
+
+
+<h:body>
+	<ui:composition template="/templates/common-layout.xhtml">
+		<ui:define name="head">
+			<title>Profile</title>
+		</ui:define>
+		<ui:define name="main">
+			<p:layout>
+
+				<p:layoutUnit position="north">
+					<h:form>
+						<h1>Welcome to #{userBean.user.name} 's page!</h1>
+						<br />
+
+						<p:commandButton value="Stop Following me!"
+							action="#{followingBean.deleteFollow()}" process="@all"
+							update="@all" />
+					</h:form>
+				</p:layoutUnit>
+				<p:layoutUnit position="center">
+					<p:layout>
+						<p:layoutUnit position="west">
+							<h:form>
+								<p:dataList value="#{followingBean.usersFollows}" var="users">
+									<f:facet name="header">
+							Who is #{userBean.user.name} following?
+							</f:facet>
+							#{users.user.name}
+						</p:dataList>
+							</h:form>
+
+
+
+						</p:layoutUnit>
+						<p:layoutUnit position="center">
+							<h1>What is #{userBean.user.name} saying?!</h1>
+							<h:form>
+								<p:dataList value="#{sayingBean.getPostByUser()}" var="sayings"
+									type="unordered">
+									<f:facet name="header">
+           		 					Sayings
+        							</f:facet>
+        							#{sayings}
+    							</p:dataList>
+								<!-- 	<p:poll interval="30" update="@form" /> -->
+							</h:form>
+
+
+						</p:layoutUnit>
+
+
+					</p:layout>
+
+				</p:layoutUnit>
+			</p:layout>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>
